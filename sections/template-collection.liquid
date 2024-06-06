@@ -1,0 +1,36 @@
+<div class="px-4 py-8">
+  {% paginate collection.products by section.settings.number_of_products_per_page %}
+    <h1 class="text-3xl text-center">{{ collection.title }}</h1>
+
+    <div class="max-w-6xl mx-auto">
+      <div class="grid frid-cols-1 md:grid-cols-3 gap-4">
+        {% for product in collection.products %}
+          {% render 'product-card'| product_item: product, show_vendor:section.settings.show_vendor %}
+        {% else %}
+          <p>there are no products inside of this collection</p>
+        {% endfor %}
+      </div>
+    </div>
+    {% render 'pagination', pagination: paginate %}
+  {% endpaginate %}
+</div>
+
+{% schema %}
+{
+  "name": "Temaplate collection",
+  "settings": [
+    {
+      "id": "number_of_products_per_page",
+      "type": "number",
+      "label": "Number of products per page",
+      "default": 3
+    },
+    {
+      "id": "show_vendor",
+      "type": "checkbox",
+      "label": "Show Vendor",
+      "default": true
+    }
+  ]
+}
+{% endschema %}
