@@ -5,7 +5,7 @@
     <div class="max-w-6xl mx-auto">
       <div class="grid frid-cols-1 md:grid-cols-3 gap-4">
         {% for product in collection.products %}
-          {% render 'product-card'| product_item: product, show_vendor:section.settings.show_vendor %}
+          {% render 'product-card', product_item: product, show_vendor: section.settings.show_vendor %}
         {% else %}
           <p>there are no products inside of this collection</p>
         {% endfor %}
@@ -34,3 +34,15 @@
   ]
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'product-card'| product_item: product, show_vendor:section.settings.show_vendor
+    %}"
+  to: "{% render 'product-card', product_item: product, show_vendor: section.settings.show_vendor
+    %}"
+  position: 328..421
+{% endcomment %}
